@@ -4,7 +4,7 @@ const movieId = urlParams.get('id');
 const mediaType = 'movie'
 
 // Fetch movie details
-function fetchMovieDetails(movieId, mediaType) {
+function fetchMovieDetails(movieId) {
     const url = `https://api.themoviedb.org/3/${movieId}?api_key=${apiKey}&append_to_response=videos`;
     fetch(url)
         .then(response => response.json())
@@ -33,7 +33,7 @@ function displayMovieDetails(movie) {
 }
 
 // Fetch related movies
-function fetchRelatedMovies(movieId, mediaType) {
+function fetchRelatedMovies(movieId) {
     const url = `https://api.themoviedb.org/3/${movieId}/similar?api_key=${apiKey}`;
     fetch(url)
         .then(response => response.json())
