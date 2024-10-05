@@ -1,16 +1,15 @@
 const apiKey = '73da3c2a52ca1beaa0d9360994a2d8a2';
 const urlParams = new URLSearchParams(window.location.search);
 const movieId = urlParams.get('id');
-const mediaType = urlParams.get('type');
 
 // Fetch movie details
-function fetchMovieDetails(movieId, mediaType) {
-    const url = `https://api.themoviedb.org/3/${mediaType}/${movieId}?api_key=${apiKey}&append_to_response=videos`;
+function fetchMovieDetails(movieId) {
+    const url = `https://api.themoviedb.org/3/${movieId}?api_key=${apiKey}&append_to_response=videos`;
     fetch(url)
         .then(response => response.json())
         .then(data => {
             displayMovieDetails(data);
-            fetchRelatedMovies(movieId, mediaType); // Fetch related movies after movie details
+            fetchRelatedMovies(movieId); // Fetch related movies after movie details
         })
         .catch(error => {
             console.error('Error fetching movie details:', error);
@@ -34,7 +33,7 @@ function displayMovieDetails(movie) {
 
 // Fetch related movies
 function fetchRelatedMovies(movieId, mediaType) {
-    const url = `https://api.themoviedb.org/3/${mediaType}/${movieId}/similar?api_key=${apiKey}`;
+    const url = `https://api.themoviedb.org/3/${movieId}/similar?api_key=${apiKey}`;
     fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -63,7 +62,7 @@ function displayRelatedMovies(movies) {
 
 // Navigate to the detail page of the related movie
 function showDetails(id, type) {
-    window.location.href = `detail.html?id=${id}&type=${type}`;
+    window.location.href = `detail.html?id=${id}`;
 }
 
 // Fetch movie details on page load
