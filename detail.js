@@ -1,7 +1,7 @@
 const apiKey = '73da3c2a52ca1beaa0d9360994a2d8a2';
 const urlParams = new URLSearchParams(window.location.search);
 const movieId = urlParams.get('id');
-const mediaType = urlParams.get('type');
+const mediaType = urlParams.get('movie');
 
 // Fetch movie details
 function fetchMovieDetails(movieId, mediaType) {
