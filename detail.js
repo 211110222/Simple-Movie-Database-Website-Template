@@ -26,7 +26,7 @@ function displayMovieDetails(movie) {
 
     const trailer = movie.videos.results.find(video => video.type === 'Trailer' && video.site === 'YouTube');
     if (trailer) {
-        document.getElementById('movie-trailer').src = `https://vidsrc.dev/embed/movie/${movieId}`;
+        document.getElementById('movie-trailer').src = `https://hnembed.cc/embed/movie/${movieId}`;
     } else {
         document.getElementById('movie-trailer').src = 'index.html'; // Fallback if no trailer
     }
