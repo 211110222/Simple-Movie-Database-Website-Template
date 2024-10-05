@@ -61,8 +61,8 @@ function displayResults(results) {
 }
 
 // Navigate to detail page
-function showDetails(id, movie) {
-    window.location.href = `detail.html?id=${id}&type=${movie}`;
+function showDetails(id, type) {
+    window.location.href = `detail.html?id=${id}&type=${type}`;
 }
 
 // Fetch popular movies from TMDB
