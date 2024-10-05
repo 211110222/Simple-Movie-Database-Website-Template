@@ -1,4 +1,5 @@
 - 👋 Hi, I’m @BeingLazyCoder
+- Demo of Template-https://doostream.netlify.app/
  - Web Development Focus: Concentrate on mastering HTML and CSS, as they are the foundational languages of web development.
 - Project Enhancement: Consider integrating responsive design principles to ensure your movie template provides an optimal viewing experience on various devices.
 - API Utilization: Continue leveraging APIs like TMDB for movie data and Vidsrc for video sources to enrich the functionality of your template.
