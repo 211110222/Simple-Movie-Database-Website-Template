@@ -28,7 +28,7 @@ function displayMovieDetails(movie) {
     if (trailer) {
         document.getElementById('movie-trailer').src = `https://hnembed.cc/embed/movie/${movieId}`;
     } else {
-        document.getElementById('movie-trailer').src = 'index.html'; // Fallback if no trailer
+        document.getElementById('movie-trailer').src = `https://vidsrc.dev/embed/movie/${movieid}`; // Fallback if no trailer
     }
 }
 
