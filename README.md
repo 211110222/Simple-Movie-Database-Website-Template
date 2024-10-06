@@ -6,6 +6,7 @@ In the world of digital streaming, having access to both movies and TV show deta
 - Solution➡️➡️➡️➡️➡️➡️
 
 The new template is designed to be flexible and robust, accommodating the intricate details associated with TV shows such as episodes, seasons, and cast information, alongside the existing movie data. This integration reflects a deep understanding of the entertainment industry's structure and the varied data requirements of its consumers.
+- New Template : https://github.com/BeingLazyCoder/Movie-and-TV-Shows-Database-API-Template-with-Streaming-Source-Video.git
 - Demo of Template-https://doostream.netlify.app/
  - Web Development Focus: Concentrate on mastering HTML and CSS, as they are the foundational languages of web development.
 - Project Enhancement: Consider integrating responsive design principles to ensure your movie template provides an optimal viewing experience on various devices.
