@@ -1,5 +1,5 @@
 - 👋 Hi, I’m @BeingLazyCoder
-- Warning⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+- Errors⚠️⚠️⚠️⚠️⚠️⚠️⚠️
 
 - Created a Unified API Template for Movies and TV Shows
 In the world of digital streaming, having access to both movies and TV show details through a single API can be a game-changer for developers. Recognizing the limitations of a Movies-only API, a developer has taken the initiative to create a new template that caters to both Movies and TV Shows. This innovative approach not only streamlines the process of fetching details from a vast database but also enhances the user experience by providing a comprehensive view of the entertainment world.
