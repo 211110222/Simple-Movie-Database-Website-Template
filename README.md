@@ -1,8 +1,10 @@
 - 👋 Hi, I’m @BeingLazyCoder
 - Warning⚠️⚠️⚠️⚠️⚠️⚠️⚠️
--Created a Unified API Template for Movies and TV Shows
+
+- Created a Unified API Template for Movies and TV Shows
 In the world of digital streaming, having access to both movies and TV show details through a single API can be a game-changer for developers. Recognizing the limitations of a Movies-only API, a developer has taken the initiative to create a new template that caters to both Movies and TV Shows. This innovative approach not only streamlines the process of fetching details from a vast database but also enhances the user experience by providing a comprehensive view of the entertainment world.
--Solution➡️➡️➡️➡️➡️➡️
+- Solution➡️➡️➡️➡️➡️➡️
+
 The new template is designed to be flexible and robust, accommodating the intricate details associated with TV shows such as episodes, seasons, and cast information, alongside the existing movie data. This integration reflects a deep understanding of the entertainment industry's structure and the varied data requirements of its consumers.
 - Demo of Template-https://doostream.netlify.app/
  - Web Development Focus: Concentrate on mastering HTML and CSS, as they are the foundational languages of web development.
