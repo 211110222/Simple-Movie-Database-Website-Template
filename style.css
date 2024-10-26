@@ -157,6 +157,15 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
     to { transform: rotate(360deg); }
 }
 
+/* Adjust spacing between filter section and movie grid */
+.filter-container {
+    margin-bottom: 30px; /* Adds space below the filter section */
+}
+
+.movie-grid {
+    margin-top: 20px; /* Adds space above the movie grid */
+}
+
 /* Popular Movies Section */
 .popular-movies h2 {
     font: 2em geargia;
