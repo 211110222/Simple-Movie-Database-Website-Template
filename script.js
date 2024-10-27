@@ -1,4 +1,4 @@
-const apiKey = '73da3c2a52ca1beaa0d9360994a2d8a2';
+const apiKey = '6d6a7726926c4e1e2cbfbefdf3112379';
 const searchInput = document.getElementById('search-bar');
 const headerSearchInput = document.getElementById('header-search-bar');
 const searchResults = document.getElementById('search-results');
@@ -10,13 +10,7 @@ const UpcomingMoviesList = document.getElementById('upcoming-movies')
 // Load popular movies on page load
 document.addEventListener('DOMContentLoaded', function () {
     fetchPopularMovies();
-});
-// Load Top Rated movies on page load
-document.addEventListener('DOMContentLoaded', function () {
     fetchTopRatedMovies ();
-});
-// Load Upcoming movies on page load
-document.addEventListener('DOMContentLoaded', function () {
     fetchUpcomingMovies();
 });
 
@@ -48,13 +42,12 @@ function fetchMovies(query) {
 }
 
 function displayResults(results) {
+    console.log(results); // Tambahkan log ini untuk cek data
     searchResults.innerHTML = '';
     results.forEach(result => {
         const movieItem = document.createElement('div');
         movieItem.classList.add('movie-item');
-        movieItem.innerHTML = `
-            <img src="https://image.tmdb.org/t/p/w500${result.poster_path}" alt="${result.title || result.name}">
-        `;
+        movieItem.innerHTML = `<img src="https://image.tmdb.org/t/p/w500${result.poster_path}" alt="${result.title || result.name}">`;
         movieItem.onclick = () => showDetails(result.id, result.media_type);
         searchResults.appendChild(movieItem);
     });
@@ -70,6 +63,10 @@ function fetchPopularMovies() {
     fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`)
         .then(response => response.json())
         .then(data => {
+            console.log(data); // Periksa data ini
+            displayPopularMovies(data.results);
+        })
+        .then(data => {
             displayPopularMovies(data.results);
         })
         .catch(error => {
@@ -78,17 +75,22 @@ function fetchPopularMovies() {
 }
 // Display popular movies in the grid
 function displayPopularMovies(movies) {
+    
     popularMovieList.innerHTML = '';
     movies.forEach(movie => {
         const movieItem = document.createElement('div');
         movieItem.classList.add('movie-item');
         movieItem.innerHTML = `
             <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+            <h3>${movie.title}</h3>
+            <p>Rating: ${movie.vote_average} ☆</p>
         `;
+        console.log(movie.title, movie.vote_average);
         movieItem.onclick = () => showDetails(movie.id, 'movie');
         popularMovieList.appendChild(movieItem);
     });
 }
+
 // Fetch Top Rated movies from TMDB
 function fetchTopRatedMovies() {
     fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}`)
@@ -108,6 +110,8 @@ function displayTopRatedMovies(movies) {
         movieItem.classList.add('movie-item');
         movieItem.innerHTML = `
             <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+            <h3>${movie.title}</h3>
+            <p>Rating: ${movie.vote_average}</p>
         `;
         movieItem.onclick = () => showDetails(movie.id, 'movie');
         TopRatedMovieList.appendChild(movieItem);
@@ -132,8 +136,15 @@ function displayUpcomingMovies(movies) {
         movieItem.classList.add('movie-item');
         movieItem.innerHTML = `
             <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+            <h3>${movie.title}</h3>
+            <p>Rating: ${movie.vote_average}</p>
         `;
         movieItem.onclick = () => showDetails(movie.id, 'movie');
        UpcomingMoviesList.appendChild(movieItem);
     });
+}
+if (movie.poster_path) {
+    movieItem.innerHTML = `<img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">`;
+} else {
+    movieItem.innerHTML = `<div>No Image Available</div>`;
 }
