@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DooStream - Search Movies & TV Shows</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <a class="logo" href="index.html">DooStream</a>
+    </header>
+    <!-- Main Content -->
+    <div class="background">
+        <!-- Search Section -->
+        <div class="search-container">
+            <h1>Find Your Favorite Movies & TV Shows</h1>
+            <input type="text" id="search-bar" placeholder="Search for a Movie...">
+            <div class="spinner" id="spinner"></div> <!-- Spinner for loading -->
+        </div>
+        
+        <!-- Filter Section -->
+        <div class="filter-container">
+            <select id="genre-filter">
+                <option value="">Select Genre</option>
+            </select>
+            <input type="number" id="release-year" placeholder="Release Year">
+            <select id="language-filter">
+                <option value="">Select Language</option>
+            </select>
+            <input type="number" id="rating" placeholder="Minimum Rating" min="0" max="10" step="0.1">
+            <button id="reset-filters">Reset Filters</button>
+        </div>
+        <div id="spinner" style="display: none;">Loading...</div>
+        <div id="search-results"></div>
+        
+        <!-- Search Results Section -->
+        <div id="search-results" class="movie-grid"></div> <!-- Search results as movie cards -->
+
+        <!-- Popular Movies Section -->
+        <div class="popular-movies">
+            <h2>Popular Movies</h2>
+            <div id="popular-movie-list" class="movie-grid"></div>
+        </div>
+        
+        <!-- Top Rated Movies Section -->
+        <div class="popular-movies">
+            <h2>Top Rated Movies</h2>
+            <div id="top-movies" class="movie-grid"></div>
+        </div>
+        
+        <!-- Upcoming Movies Section -->
+        <div class="popular-movies">
+            <h2>Upcoming Movies</h2>
+            <div id="upcoming-movies" class="movie-grid"></div>
+        </div>
+    </div>
+
+    <script src="D:\Aldi\MoviePlay\Simple-Movie-Database-Website-Template-aldi\Aldi\script.js"></script>
+</body>
+</html>
