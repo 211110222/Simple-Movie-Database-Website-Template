@@ -170,7 +170,6 @@ function displayTopRatedMovies(movies) {
     });
 }
 
-// Fetch Upcoming movies from TMDB
 async function fetchUpcomingMovies() {
     const response = await fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&include_adult=false`);
     const data = await response.json();

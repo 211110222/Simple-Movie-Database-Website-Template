@@ -8,8 +8,13 @@ function fetchMovieDetails(movieId, mediaType) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            displayMovieDetails(data);
-            fetchRelatedMovies(movieId, mediaType);
+            if (filterAdultContent(data)) {
+                displayMovieDetails(data);
+                fetchRelatedMovies(movieId, mediaType);
+            } else {
+                alert('This movie is not available due to inappropriate content.');
+                window.location.href = 'index.html';
+            }
         })
         .catch(error => {
             console.error('Error fetching movie details:', error);
@@ -35,7 +40,8 @@ function fetchRelatedMovies(movieId, mediaType) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            displayRelatedMovies(data.results);
+            const filteredMovies = data.results.filter(movie => filterAdultContent(movie));
+            displayRelatedMovies(filteredMovies);
         })
         .catch(error => {
             console.error('Error fetching related movies:', error);
@@ -45,7 +51,6 @@ function fetchRelatedMovies(movieId, mediaType) {
 function displayRelatedMovies(movies) {
     const slider = document.getElementById('related-movies-slider');
     slider.innerHTML = '';
-
     movies.forEach(movie => {
         if (movie.poster_path) {
             const movieItem = document.createElement('div');
@@ -63,10 +68,6 @@ function showDetails(id, type) {
     window.location.href = `detail.html?id=${id}&type=${type}`;
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    fetchMovieDetails(movieId, mediaType);
-});
-
 function toggleFavorite() {
     const loggedInUser = localStorage.getItem("loggedInUser");
     if (!loggedInUser) {
@@ -75,7 +76,6 @@ function toggleFavorite() {
     }
 
     let favorites = JSON.parse(localStorage.getItem(`${loggedInUser}_favorites`)) || [];
-
     const favoriteEntry = { id: String(movieId), type: mediaType };
     const existingIndex = favorites.findIndex(entry => entry.id === String(movieId));
 
@@ -87,9 +87,6 @@ function toggleFavorite() {
         alert("Added to favorites.");
     }
     localStorage.setItem(`${loggedInUser}_favorites`, JSON.stringify(favorites));
-
-    console.log(`Favorites list for ${loggedInUser}:`, favorites);
-
     updateLikeButton();
 }
 
@@ -109,7 +106,71 @@ function updateLikeButton() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+async function fetchCertification(movieId) {
+    const url = `https://api.themoviedb.org/3/movie/${movieId}/release_dates?api_key=${apiKey}`;
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        const usCertifications = data.results.find(cert => cert.iso_3166_1 === 'US');
+        if (usCertifications) {
+            const certification = usCertifications.release_dates[0]?.certification;
+            return certification;
+        }
+    } catch (error) {
+        console.error(`Error fetching certification for movie ${movieId}:`, error);
+    }
+    return null;
+}
+
+function filterAdultContent(movie) {
+    if (movie.adult) return false;
+
+    const restrictedGenres = ['Adult', 'Erotic'];
+    const adultKeywords = [
+        'erotic', 'sex', 'explicit', 'nude', 'mature', 'softcore', 'hardcore',
+        'complicated relationship', 'sensual', 'seductive', 'affair', 'provocative', 
+        'lust', 'romantic obsession', 'porn', 'sexual', 'scandal', 'temptation', 
+        'strip', 'fetish', 'kinky', 'incest', 'taboo', 'voyeur', 'pleasure'
+    ];
+
+    if (movie.genre_ids && movie.genre_ids.some(genre => restrictedGenres.includes(genre))) {
+        return false;
+    }
+
+    const lowerTitle = (movie.title || '').toLowerCase();
+    const lowerOverview = (movie.overview || '').toLowerCase();
+    if (adultKeywords.some(keyword => lowerTitle.includes(keyword) || lowerOverview.includes(keyword))) {
+        return false;
+    }
+
+    return true;
+}
+
+document.addEventListener('DOMContentLoaded', function () {
     fetchMovieDetails(movieId, mediaType);
     updateLikeButton();
+});
+document.getElementById('scroll-left').addEventListener('click', function() {
+    document.getElementById('related-movies-slider').scrollBy({
+        left: -300,
+        behavior: 'smooth'
+    });
+});
+
+document.getElementById('scroll-right').addEventListener('click', function() {
+    document.getElementById('related-movies-slider').scrollBy({
+        left: 300,
+        behavior: 'smooth'
+    });
+});
+
+const slider = document.getElementById('related-movies-slider');
+slider.addEventListener('wheel', (e) => {
+    if (e.deltaY !== 0) {
+        e.preventDefault();
+        slider.scrollBy({
+            left: e.deltaY < 0 ? -100 : 100,
+            behavior: 'smooth'
+        });
+    }
 });
