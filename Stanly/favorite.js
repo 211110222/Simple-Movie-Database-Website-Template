@@ -1,4 +1,4 @@
-const apiKey = '6d6a7726926c4e1e2cbfbefdf3112379';
+const apiKey = "6d6a7726926c4e1e2cbfbefdf3112379";
 
 function loadFavorites() {
     const loggedInUser = localStorage.getItem("loggedInUser");

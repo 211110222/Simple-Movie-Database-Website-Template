@@ -1,13 +1,13 @@
 function toggleForms() {
-    const loginForm = document.getElementById('login-form');
-    const registerForm = document.getElementById('register-form');
-    loginForm.style.display = loginForm.style.display === 'none' ? 'block' : 'none';
-    registerForm.style.display = registerForm.style.display === 'none' ? 'block' : 'none';
+    const loginForm = document.getElementById("login-form");
+    const registerForm = document.getElementById("register-form");
+    loginForm.style.display = loginForm.style.display === "none" ? "block" : "none";
+    registerForm.style.display = registerForm.style.display === "none" ? "block" : "none";
 }
 
 function register() {
-    const username = document.getElementById('reg-username').value;
-    const password = document.getElementById('reg-password').value;
+    const username = document.getElementById("reg-username").value;
+    const password = document.getElementById("reg-password").value;
 
     if (!username || !password) {
         alert("Please fill in both fields.");
@@ -25,8 +25,8 @@ function register() {
 }
 
 function login() {
-    const username = document.getElementById('login-username').value;
-    const password = document.getElementById('login-password').value;
+    const username = document.getElementById("login-username").value;
+    const password = document.getElementById("login-password").value;
 
     if (!username || !password) {
         alert("Please fill in both fields.");
