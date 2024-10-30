@@ -21,8 +21,5 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Navigate to Subfolder (If package.json is not in the root)
-        working-directory: ./subfolder-name
-
       - name: Install Dependencies
         run: npm install
