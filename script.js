@@ -6,14 +6,12 @@ const popularMovieList = document.getElementById('popular-movie-list');
 const topRatedMovieList = document.getElementById('top-movies');
 const upcomingMoviesList = document.getElementById('upcoming-movies');
 
-// Redirect to auth.html if not logged in
 document.addEventListener('DOMContentLoaded', function () {
     if (!localStorage.getItem("loggedInUser")) {
         window.location.href = "./Stanly/auth.html";
     }
 });
 
-// Load movies on page load
 document.addEventListener('DOMContentLoaded', function () {
     fetchPopularMovies();
     fetchTopRatedMovies();
@@ -30,7 +28,6 @@ searchInput.addEventListener('input', function () {
     }
 });
 
-// Heuristic Filtering Function
 function filterAdultContent(movie) {
     if (movie.adult) return false;
 
@@ -54,7 +51,6 @@ function filterAdultContent(movie) {
     return true;
 }
 
-// Fetch certification for each movie
 async function fetchCertification(movieId) {
     const url = `https://api.themoviedb.org/3/movie/${movieId}/release_dates?api_key=${apiKey}`;
     try {
@@ -71,7 +67,6 @@ async function fetchCertification(movieId) {
     return null;
 }
 
-// Main fetch function with certification and keyword filtering
 async function fetchMovies(query) {
     spinner.style.display = 'block'; 
     searchResults.innerHTML = ''; 
@@ -109,12 +104,10 @@ function displayResults(results) {
     });
 }
 
-// Navigate to detail page
 function showDetails(id, type) {
     window.location.href = `detail.html?id=${id}&type=${type}`;
 }
 
-// Fetch popular movies from TMDB
 async function fetchPopularMovies() {
     const response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&include_adult=false`);
     const data = await response.json();
@@ -131,7 +124,6 @@ async function fetchPopularMovies() {
     displayPopularMovies(filteredMovies);
 }
 
-// Display popular movies in the grid
 function displayPopularMovies(movies) {
     popularMovieList.innerHTML = '';
     movies.forEach(movie => {
@@ -147,7 +139,6 @@ function displayPopularMovies(movies) {
     });
 }
 
-// Fetch Top Rated movies from TMDB
 async function fetchTopRatedMovies() {
     const response = await fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&include_adult=false`);
     const data = await response.json();
@@ -164,7 +155,6 @@ async function fetchTopRatedMovies() {
     displayTopRatedMovies(filteredMovies);
 }
 
-// Display top rated movies in the grid
 function displayTopRatedMovies(movies) {
     topRatedMovieList.innerHTML = '';
     movies.forEach(movie => {
@@ -197,7 +187,6 @@ async function fetchUpcomingMovies() {
     displayUpcomingMovies(filteredMovies);
 }
 
-// Display upcoming movies in the grid
 function displayUpcomingMovies(movies) {
     upcomingMoviesList.innerHTML = '';
     movies.forEach(movie => {
@@ -213,6 +202,6 @@ function displayUpcomingMovies(movies) {
     });
 }
 function logout() {
-    localStorage.removeItem("loggedInUser"); // Remove the login flag
-    window.location.href = "./Stanly/auth.html"; // Redirect to login page
+    localStorage.removeItem("loggedInUser");
+    window.location.href = "./Stanly/auth.html";
 }

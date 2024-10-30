@@ -1,8 +1,7 @@
-/* Global Styles */
 body{
-    background: #000000;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #434343, #000000);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
+    background: #000000;
+background: -webkit-linear-gradient(to right, #434343, #000000);
+background: linear-gradient(to right, #434343, #000000);
     min-height: 100vh;
     min-height: 100dvh;
     margin: 0;
@@ -10,7 +9,6 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
     color: white;
 }
 
-/* Header Styles */
 .header {
     text-align: center;
     padding: 20px;
@@ -26,13 +24,11 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
     align-items: center;
 }
 
-/* Main Container */
 .background {
     padding: 20px;
     text-align: center;
 }
 
-/* Movie Details Styles */
 .detail-page {
     padding: 20px;
     max-width: 1200px;
@@ -49,7 +45,7 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
 
 .video-wrapper {
     position: relative;
-    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    padding-bottom: 56.25%;
     height: 0;
 }
 
@@ -76,7 +72,6 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
     margin-bottom: 15px;
 }
 
-/* Related Movies Slider */
 .related-movies {
     margin-top: 30px;
 }
@@ -117,14 +112,13 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
     height: auto;
     display: block;
 }
-/* Center search bar and popular movie section */
+
 .background {
     background-color: transparent;
     padding: 20px;
     text-align: center;
 }
 
-/* Search Bar Container */
 .search-container {
     margin-bottom: 50px;
 }
@@ -140,7 +134,6 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
     margin-top: 20px;
 }
 
-/* Spinner Styles */
 .spinner {
     display: none;
     margin: 20px auto;
@@ -157,7 +150,6 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
     to { transform: rotate(360deg); }
 }
 
-/* Popular Movies Section */
 .popular-movies h2 {
     font: 2em geargia;
     color: #1abc9c;
@@ -189,7 +181,6 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
     display: block;
 }
 
-/* Responsive Grid */
 @media screen and (max-width: 1200px) {
     .movie-grid {
         grid-template-columns: repeat(4, 1fr);
@@ -213,11 +204,11 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
         grid-template-columns: 1fr;
     }
 }
-/* Global Styles */
+
 body{
-    background: #000000;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #434343, #000000);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
+    background: #000000;
+background: -webkit-linear-gradient(to right, #434343, #000000);
+background: linear-gradient(to right, #434343, #000000);
     min-height: 100vh;
     min-height: 100dvh;
     margin: 0;
@@ -225,7 +216,6 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
     color: white;
 }
 
-/* Header Styles */
 .header {
     text-align: center;
     padding: 20px;
@@ -241,13 +231,11 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
     align-items: center;
 }
 
-/* Main Container */
 .background {
     padding: 20px;
     text-align: center;
 }
 
-/* Movie Details Styles */
 .detail-page {
     padding: 20px;
     max-width: 1200px;
@@ -264,7 +252,7 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
 
 .video-wrapper {
     position: relative;
-    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    padding-bottom: 56.25%;
     height: 0;
 }
 
@@ -291,7 +279,6 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
     margin-bottom: 15px;
 }
 
-/* Related Movies Slider */
 .related-movies {
     margin-top: 30px;
 }
@@ -332,14 +319,13 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
     height: auto;
     display: block;
 }
-/* Center search bar and popular movie section */
+
 .background {
     background-color: transparent;
     padding: 20px;
     text-align: center;
 }
 
-/* Search Bar Container */
 .search-container {
     margin-bottom: 50px;
 }
@@ -355,7 +341,6 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
     margin-top: 20px;
 }
 
-/* Spinner Styles */
 .spinner {
     display: none;
     margin: 20px auto;
@@ -372,16 +357,14 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
     to { transform: rotate(360deg); }
 }
 
-/* Adjust spacing between filter section and movie grid */
 .filter-container {
-    margin-bottom: 30px; /* Adds space below the filter section */
+    margin-bottom: 30px;
 }
 
 .movie-grid {
-    margin-top: 20px; /* Adds space above the movie grid */
+    margin-top: 20px;
 }
 
-/* Popular Movies Section */
 .popular-movies h2 {
     font: 2em geargia;
     color: #1abc9c;
@@ -437,7 +420,7 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
         grid-template-columns: 1fr;
     }
 }
-/* Authentication Container */
+
 .auth-container {
     display: flex;
     justify-content: center;
@@ -447,7 +430,6 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
     color: white;
 }
 
-/* Authentication Form Styles */
 .auth-form {
     background-color: #222;
     padding: 30px;
@@ -464,7 +446,6 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
     font-size: 2rem;
 }
 
-/* Input Fields */
 .auth-form input {
     width: 100%;
     padding: 10px;
@@ -476,7 +457,6 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
     font-size: 1rem;
 }
 
-/* Submit Button */
 .auth-form button {
     width: 100%;
     padding: 10px;
@@ -495,7 +475,6 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
     background-color: #16a085;
 }
 
-/* Toggle Link */
 .auth-form p {
     margin-top: 15px;
     font-size: 0.9rem;
@@ -531,7 +510,7 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
 .like-button.liked {
     background-color: #e74c3c;
 }
-/* Basic styling for the navigation link */
+
 .nav {
     display: inline-block;
     margin-left: auto;
@@ -560,7 +539,7 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
 .logout-button:hover {
     background-color: #d81b60;
 }
-/* Header Styling */
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -581,28 +560,26 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
     gap: 20px;
 }
 
-/* Styled Favorites Link */
 .styled-link {
-    color: #ff4081; /* Pink color for favorites */
+    color: #ff4081;
     font-size: 18px;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .styled-link i {
-    margin-right: 8px; /* Space between icon and text */
+    margin-right: 8px;
 }
 
 .styled-link:hover {
-    color: #ff79b0; /* Light pink on hover */
+    color: #ff79b0;
 }
 
-/* Styled Logout Button */
 .styled-button {
     padding: 10px 15px;
     font-size: 16px;
     color: #ffffff;
-    background-color: #e53935; /* Red color for logout */
+    background-color: #e53935;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -610,27 +587,24 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
 }
 
 .styled-button:hover {
-    background-color: #f44336; /* Brighter red on hover */
+    background-color: #f44336;
 }
 
 .styled-button:focus {
     outline: none;
 }
 
-/* Make buttons/icons stand out */
 .styled-button,
 .styled-link {
     font-weight: 600;
     text-transform: uppercase;
 }
 
-/* Optional - General Reset for Buttons and Links */
 button, a {
     outline: none;
     text-decoration: none;
 }
 
-/* Extra responsiveness for mobile views */
 @media (max-width: 768px) {
     .header {
         flex-direction: column;

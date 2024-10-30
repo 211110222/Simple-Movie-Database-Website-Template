@@ -80,26 +80,19 @@ function toggleFavorite() {
     const existingIndex = favorites.findIndex(entry => entry.id === String(movieId));
 
     if (existingIndex !== -1) {
-        // Remove from favorites
         favorites.splice(existingIndex, 1);
         alert("Removed from favorites.");
     } else {
-        // Add to favorites
         favorites.push(favoriteEntry);
         alert("Added to favorites.");
     }
-
-    // Save updated favorites list in local storage
     localStorage.setItem(`${loggedInUser}_favorites`, JSON.stringify(favorites));
 
-    // Debugging output to confirm favorite status
     console.log(`Favorites list for ${loggedInUser}:`, favorites);
 
-    // Update button appearance
     updateLikeButton();
 }
 
-// Update the like button appearance based on favorite status
 function updateLikeButton() {
     const loggedInUser = localStorage.getItem("loggedInUser");
     if (!loggedInUser) return;
@@ -116,7 +109,6 @@ function updateLikeButton() {
     }
 }
 
-// Call updateLikeButton on page load to set the correct button state
 document.addEventListener("DOMContentLoaded", function () {
     fetchMovieDetails(movieId, mediaType);
     updateLikeButton();

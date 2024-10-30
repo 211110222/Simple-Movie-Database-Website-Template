@@ -15,7 +15,6 @@ function loadFavorites() {
         return;
     }
 
-    // Fetch and display each favorite movie
     favorites.forEach(favorite => {
         fetchMovieDetail(favorite);
     });
@@ -29,7 +28,6 @@ function fetchMovieDetail(favorite) {
         .catch(error => console.error("Error fetching favorite movie:", error));
 }
 
-// Display a favorite movie in the list
 function displayFavoriteMovie(movie) {
     const favoritesList = document.getElementById("favorites-list");
     const movieCard = document.createElement("div");
@@ -48,5 +46,8 @@ function displayFavoriteMovie(movie) {
     favoritesList.appendChild(movieCard);
 }
 
-// Load favorites on page load
 document.addEventListener("DOMContentLoaded", loadFavorites);
+function logout() {
+    localStorage.removeItem("loggedInUser");
+    window.location.href = "auth.html";
+}
