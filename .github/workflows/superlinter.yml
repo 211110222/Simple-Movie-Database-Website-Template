@@ -1,6 +1,6 @@
-name: Lint and Auto-Fix
+name: Node.js CI
 
-on: 
+on:
   push:
     branches:
       - main
@@ -9,21 +9,20 @@ on:
       - main
 
 jobs:
-  eslint:
-    name: Lint and Auto-Fix
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
 
+      - name: Navigate to Subfolder (If package.json is not in the root)
+        working-directory: ./subfolder-name
+
       - name: Install Dependencies
         run: npm install
-
-      - name: Run ESLint with Auto-Fix
-        run: npx eslint . --fix
