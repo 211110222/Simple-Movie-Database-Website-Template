@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Lint and Fix Code Base
 
 on:
   push:
@@ -9,17 +9,47 @@ on:
       - main
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout the repository code
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
+      # Step 2: Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
 
-      - name: Install Dependencies
+      # Step 3: Install dependencies
+      # Make sure you have ESLint, Stylelint, and Prettier in your package.json
+      - name: Install dependencies
         run: npm install
+
+      # Step 4: Run ESLint to detect and fix JavaScript issues
+      - name: Lint and Fix JavaScript with ESLint
+        run: |
+          npx eslint '**/*.js' --fix
+        continue-on-error: true # This will allow the workflow to continue even if there are issues to be fixed
+
+      # Step 5: Run Stylelint to detect and fix CSS issues
+      - name: Lint and Fix CSS with Stylelint
+        run: |
+          npx stylelint '**/*.css' --fix
+        continue-on-error: true
+
+      # Step 6: Run Prettier to format HTML, CSS, and JavaScript files
+      - name: Format HTML, CSS, and JavaScript with Prettier
+        run: |
+          npx prettier '**/*.{html,css,js}' --write
+
+      # Step 7: Commit changes if any fixes were applied
+      - name: Commit changes
+        run: |
+          git config --global user.name '211110222'
+          git config --global user.email '211110222@students.mikroskil.ac.id'
+          git add .
+          git diff-index --quiet HEAD || git commit -m "Auto-fix linting issues by GitHub Action"
+        continue-on-error: true
