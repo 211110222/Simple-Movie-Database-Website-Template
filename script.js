@@ -97,6 +97,7 @@ function fetchTopRatedMovies() {
         .then(response => response.json())
         .then(data => {
             displayTopRatedMovies(data.results);
+            console.log(data.results);
         })
         .catch(error => {
             console.error('Error fetching Top Rated movies:', error);
@@ -148,3 +149,9 @@ if (movie.poster_path) {
 } else {
     movieItem.innerHTML = `<div>No Image Available</div>`;
 }
+
+
+document.getElementById('mode-toggle').addEventListener('click', toggleMode);
+
+
+

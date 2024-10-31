@@ -1,4 +1,4 @@
-const apiKey = '73da3c2a52ca1beaa0d9360994a2d8a2';
+const apiKey = '6d6a7726926c4e1e2cbfbefdf3112379';
 const urlParams = new URLSearchParams(window.location.search);
 const movieId = urlParams.get('id');
 const mediaType = 'movie';
@@ -66,7 +66,11 @@ function showDetails(id, type) {
     window.location.href = `detail.html?id=${id}&type=${type}`;
 }
 
-// Fetch movie details on page load
+// Fetch movie details on page load and load theme
 document.addEventListener('DOMContentLoaded', function () {
-    fetchMovieDetails(movieId, mediaType);
+    loadTheme();  // Load saved theme
+    fetchMovieDetails(movieId, mediaType);  // Fetch movie details
 });
+
+// Attach toggle event listener for theme
+document.getElementById('mode-toggle').addEventListener('click', toggleMode);

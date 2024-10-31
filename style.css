@@ -1,13 +1,63 @@
 /* Global Styles */
-body{
-    background: #000000;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #434343, #000000);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
+body {
+    background: #000000;
+    background: -webkit-linear-gradient(to right, #434343, #000000);
+    background: linear-gradient(to right, #434343, #000000);
     min-height: 100vh;
     min-height: 100dvh;
     margin: 0;
     font-family: 'Arial', sans-serif;
     color: white;
+}
+
+/* Light Mode */
+body.light-mode {
+    background: #ffffff;
+    color: #000000;
+}
+
+body.light-mode .header {
+    background-color: #f0f0f0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .logo {
+    color: #333;
+}
+
+body.light-mode .video-card,
+body.light-mode .movie-details {
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    color: #333;
+}
+
+body.light-mode .movie-details h1,
+body.light-mode .related-movies h2,
+body.light-mode .popular-movies h2 {
+    color: #3498db;
+}
+
+body.light-mode .movie-slider .movie-item,
+body.light-mode .movie-item {
+    box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .spinner {
+    border-top-color: #3498db;
+}
+
+body.light-mode #search-bar {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+body.light-mode .filter-container select,
+body.light-mode .filter-container input {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
 }
 
 /* Header Styles */
@@ -24,6 +74,30 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
     font-weight: 1000;
     font-family: Georgia;
     align-items: center;
+}
+
+/* Toggle Button */
+#mode-toggle {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    padding: 10px 20px;
+    background-color: #1abc9c;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+body.light-mode #mode-toggle {
+    background-color: #3498db;
+    color: #fff;
+}
+
+#mode-toggle:hover {
+    opacity: 0.8;
 }
 
 /* Main Container */
@@ -117,6 +191,7 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
     height: auto;
     display: block;
 }
+
 /* Center search bar and popular movie section */
 .background {
     background-color: transparent;
@@ -198,7 +273,6 @@ background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, F
     height: auto;
     display: block;
 }
-
 
 /* Responsive Grid */
 @media screen and (max-width: 1200px) {
