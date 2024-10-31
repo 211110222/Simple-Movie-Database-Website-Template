@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - main
+      - '*'
   pull_request:
     branches:
       - main
+      - '*'
 
 jobs:
   lint:
@@ -23,8 +25,20 @@ jobs:
         with:
           node-version: '16'
 
-      # Step 3: Install dependencies
-      # Make sure you have ESLint, Stylelint, and Prettier in your package.json
+      # Step 3: Create a temporary package.json and install dependencies
+      - name: Create temporary package.json
+        run: |
+          echo '{
+            "name": "temp-lint-package",
+            "version": "1.0.0",
+            "private": true,
+            "devDependencies": {
+              "eslint": "^8.0.0",
+              "stylelint": "^14.0.0",
+              "prettier": "^2.0.0"
+            }
+          }' > package.json
+
       - name: Install dependencies
         run: npm install
 
@@ -32,7 +46,7 @@ jobs:
       - name: Lint and Fix JavaScript with ESLint
         run: |
           npx eslint '**/*.js' --fix
-        continue-on-error: true # This will allow the workflow to continue even if there are issues to be fixed
+        continue-on-error: true
 
       # Step 5: Run Stylelint to detect and fix CSS issues
       - name: Lint and Fix CSS with Stylelint
