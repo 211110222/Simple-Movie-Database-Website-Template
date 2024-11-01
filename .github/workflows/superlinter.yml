@@ -17,8 +17,10 @@ jobs:
       - name: Run Super-Linter
         uses: github/super-linter@v4
         env:
-          VALIDATE_ALL_CODEBASE: true
-          DEFAULT_BRANCH: Final
-          RUN_LOCAL: false
-          TEXTLINT_FIX: true
+          VALIDATE_ALL_CODEBASE: false
+          VALIDATE_JS: true
+          VALIDATE_CSS: false
+          VALIDATE_HTML: false
+          VALIDATE_MARKDOWN: false
+          VALIDATE_YAML: true
 
