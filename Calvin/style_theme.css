@@ -1,0 +1,63 @@
+/* Light Mode */
+body.light-mode {
+    background: #ffffff;
+    color: #000000;
+}
+
+body.light-mode .header {
+    background-color: #f0f0f0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .logo,
+body.light-mode .favorites-link {
+    color: #333;
+}
+
+body.light-mode .video-card,
+body.light-mode .movie-details,
+body.light-mode .auth-form {
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    color: #333;
+}
+
+body.light-mode .movie-details h1,
+body.light-mode .related-movies h2,
+body.light-mode .popular-movies h2 {
+    color: #3498db;
+}
+
+body.light-mode .movie-slider .movie-item,
+body.light-mode .movie-item {
+    box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .spinner {
+    border-top-color: #3498db;
+}
+
+body.light-mode #search-bar {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+body.light-mode .filter-container select,
+body.light-mode .filter-container input {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+body.light-mode .logout-button {
+    background-color: #d9534f;
+}
+
+body.light-mode .like-button {
+    background-color: #5bc0de;
+}
+
+body.light-mode .like-button.liked {
+    background-color: #c9302c;
+}

@@ -51,3 +51,4 @@ function logout() {
     localStorage.removeItem("loggedInUser");
     window.location.href = "auth.html";
 }
+document.getElementById('mode-toggle').addEventListener('click', toggleMode);

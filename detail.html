@@ -6,11 +6,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>DooStream - Movie Details</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./Calvin/style_theme.css">
 </head>
 <body>
-     <header class="header">
+    <header class="header">
         <a class="logo" href="index.html">DooStream</a>
-        </header>    
+        <nav class="nav">
+            <button id="mode-toggle">Change Theme</button>
+            <a href="./Stanly/favorite.html" class="favorites-link">Favorites</a>
+            <button onclick="logout()" class="logout-button">Log Out</button>
+        </nav>
+    </header>   
     <div class="detail-page">
         <div class="video-card">
             <div class="video-wrapper">
@@ -22,7 +28,7 @@
             <p id="release-date">Release Date: --</p>
             <p id="duration">Duration: -- minutes</p>
             <p id="summary">Movie summary goes here...</p>
-        </div>
+        </div>  
         <button id="like-button" onclick="toggleFavorite()" class="like-button">Like</button>
         <div class="related-movies">
             <h2>Related Movies</h2>
@@ -31,7 +37,7 @@
             <button id="scroll-right" class="scroll-button"><i class="fas fa-chevron-right"></i></button>
         </div>
     </div>
-
+    <script src="./Calvin/themecode.js"></script>
     <script src="detail.js"></script>
 </body>
 </html>

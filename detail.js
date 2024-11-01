@@ -8,13 +8,8 @@ function fetchMovieDetails(movieId, mediaType) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            if (filterAdultContent(data)) {
-                displayMovieDetails(data);
-                fetchRelatedMovies(movieId, mediaType);
-            } else {
-                alert("This movie is not available due to inappropriate content.");
-                window.location.href = "index.html";
-            }
+            displayMovieDetails(data);
+            fetchRelatedMovies(movieId, mediaType);
         })
         .catch(error => {
             console.error("Error fetching movie details:", error);
@@ -40,8 +35,7 @@ function fetchRelatedMovies(movieId, mediaType) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            const filteredMovies = data.results.filter(movie => filterAdultContent(movie));
-            displayRelatedMovies(filteredMovies);
+            displayRelatedMovies(data.results);
         })
         .catch(error => {
             console.error("Error fetching related movies:", error);
@@ -122,31 +116,8 @@ async function fetchCertification(movieId) {
     return null;
 }
 
-function filterAdultContent(movie) {
-    if (movie.adult) return false;
-
-    const restrictedGenres = ["Adult", "Erotic"];
-    const adultKeywords = [
-        "erotic", "sex", "explicit", "nude", "mature", "softcore", "hardcore",
-        "complicated relationship", "sensual", "seductive", "affair", "provocative", 
-        "lust", "romantic obsession", "porn", "sexual", "scandal", "temptation", 
-        "strip", "fetish", "kinky", "incest", "taboo", "voyeur", "pleasure"
-    ];
-
-    if (movie.genre_ids && movie.genre_ids.some(genre => restrictedGenres.includes(genre))) {
-        return false;
-    }
-
-    const lowerTitle = (movie.title || "").toLowerCase();
-    const lowerOverview = (movie.overview || "").toLowerCase();
-    if (adultKeywords.some(keyword => lowerTitle.includes(keyword) || lowerOverview.includes(keyword))) {
-        return false;
-    }
-
-    return true;
-}
-
 document.addEventListener("DOMContentLoaded", function () {
+    loadTheme()
     fetchMovieDetails(movieId, mediaType);
     updateLikeButton();
 });
@@ -174,3 +145,5 @@ slider.addEventListener("wheel", (e) => {
         });
     }
 });
+
+document.getElementById('mode-toggle').addEventListener('click', toggleMode);
