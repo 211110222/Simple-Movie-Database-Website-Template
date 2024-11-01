@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - Final
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -17,10 +18,6 @@ jobs:
       - name: Run Super-Linter
         uses: github/super-linter@v4
         env:
-          VALIDATE_ALL_CODEBASE: false
           VALIDATE_JS: true
-          VALIDATE_CSS: false
-          VALIDATE_HTML: false
-          VALIDATE_MARKDOWN: false
           VALIDATE_YAML: true
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
