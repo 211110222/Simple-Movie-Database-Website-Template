@@ -23,4 +23,4 @@ jobs:
           VALIDATE_HTML: false
           VALIDATE_MARKDOWN: false
           VALIDATE_YAML: true
-          GITHUB_TOKEN: ${{ secrets.GITHUB.TOKEN  }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
