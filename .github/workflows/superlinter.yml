@@ -1,4 +1,4 @@
-name: Lint and Fix Code Base
+name: Super-Linter Check
 
 on:
   push:
@@ -19,92 +19,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Step 2: Set up Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-
-      # Step 3: Create a temporary package.json and install dependencies
-      - name: Create temporary package.json
-        run: |
-          echo '{
-            "name": "temp-lint-package",
-            "version": "1.0.0",
-            "private": true,
-            "devDependencies": {
-              "eslint": "^8.0.0",
-              "stylelint": "^14.0.0",
-              "prettier": "^2.0.0",
-              "stylelint-config-standard": "^25.0.0"
-            }
-          }' > package.json
-      - name: Install dependencies
-        run: npm install
-
-      # Step 4: Create ESLint, Stylelint, and Prettier configuration files
-      - name: Create ESLint Configuration
-        run: |
-          echo '{
-            "env": {
-              "browser": true,
-              "es2021": true
-            },
-            "extends": "eslint:recommended",
-            "parserOptions": {
-              "ecmaVersion": 12,
-              "sourceType": "module"
-            },
-            "rules": {
-              "indent": ["error", 2],
-              "linebreak-style": ["error", "unix"],
-              "quotes": ["error", "double"],
-              "semi": ["error", "always"]
-            }
-          }' > .eslintrc.json
-
-      - name: Create Stylelint Configuration
-        run: |
-          echo '{
-            "extends": "stylelint-config-standard",
-            "rules": {
-              "indentation": 2,
-              "string-quotes": "double",
-              "color-no-invalid-hex": true
-            }
-          }' > .stylelintrc.json
-
-      - name: Create Prettier Configuration
-        run: |
-          echo '{
-            "singleQuote": false,
-            "trailingComma": "es5",
-            "tabWidth": 2,
-            "semi": true
-          }' > .prettierrc
-
-      # Step 5: Run ESLint to detect and fix JavaScript issues
-      - name: Lint and Fix JavaScript with ESLint
-        run: |
-          npx eslint '**/*.js' --fix
-        continue-on-error: true
-
-      # Step 6: Run Stylelint to detect and fix CSS issues
-      - name: Lint and Fix CSS with Stylelint
-        run: |
-          npx stylelint '**/*.css' --fix
-        continue-on-error: true
-
-      # Step 7: Run Prettier to format HTML, CSS, and JavaScript files
-      - name: Format HTML, CSS, and JavaScript with Prettier
-        run: |
-          npx prettier '**/*.{html,css,js}' --write
-
-      # Step 8: Commit changes if any fixes were applied
-      - name: Commit changes
-        run: |
-          git config --global user.name '211110222'
-          git config --global user.email '211110222@students.mikroskil.ac.id'
-          git add .
-          git diff-index --quiet HEAD || git commit -m "Auto-fix linting issues by GitHub Action"
-        continue-on-error: true
+      # Step 2: Run Super-Linter
+      - name: Run Super-Linter
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: true
+          DEFAULT_BRANCH: main
