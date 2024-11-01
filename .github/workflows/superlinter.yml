@@ -3,26 +3,22 @@ name: Super-Linter Check
 on:
   push:
     branches:
-      - main
-      - '*'
+      - Final
   pull_request:
     branches:
-      - main
-      - '*'
+      - Final
 
 jobs:
   lint:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository code
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Step 2: Run Super-Linter
       - name: Run Super-Linter
         uses: github/super-linter@v4
         env:
           VALIDATE_ALL_CODEBASE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BRANCH: main
+          DEFAULT_BRANCH: Final
