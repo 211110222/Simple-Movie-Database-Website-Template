@@ -1,4 +1,4 @@
-function toggleForms() {
+function toggleForms () {
   const loginForm = document.getElementById('login-form')
   const registerForm = document.getElementById('register-form')
   loginForm.style.display =
@@ -8,7 +8,7 @@ function toggleForms() {
 }
 
 // eslint-disable-next-line no-unused-vars
-function register() {
+function register () {
   const username = document.getElementById('reg-username').value
   const password = document.getElementById('reg-password').value
 
@@ -28,7 +28,7 @@ function register() {
 }
 
 // eslint-disable-next-line no-unused-vars
-function login() {
+function login () {
   const username = document.getElementById('login-username').value
   const password = document.getElementById('login-password').value
 

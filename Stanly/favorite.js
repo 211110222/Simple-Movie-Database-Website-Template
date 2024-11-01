@@ -1,7 +1,7 @@
-/* global toggleMode*/
+/* global toggleMode */
 const apiKey = '6d6a7726926c4e1e2cbfbefdf3112379'
 
-function loadFavorites() {
+function loadFavorites () {
   const loggedInUser = localStorage.getItem('loggedInUser')
   if (!loggedInUser) {
     alert('Please log in to view your favorites.')
@@ -23,7 +23,7 @@ function loadFavorites() {
   })
 }
 
-function fetchMovieDetail(favorite) {
+function fetchMovieDetail (favorite) {
   const url = `https://api.themoviedb.org/3/${favorite.type}/${favorite.id}?api_key=${apiKey}`
   fetch(url)
     .then((response) => response.json())
@@ -31,7 +31,7 @@ function fetchMovieDetail(favorite) {
     .catch((error) => console.error('Error fetching favorite movie:', error))
 }
 
-function displayFavoriteMovie(movie) {
+function displayFavoriteMovie (movie) {
   const favoritesList = document.getElementById('favorites-list')
   const movieCard = document.createElement('div')
   movieCard.classList.add('movie-item')
@@ -51,7 +51,7 @@ function displayFavoriteMovie(movie) {
 
 document.addEventListener('DOMContentLoaded', loadFavorites)
 // eslint-disable-next-line no-unused-vars
-function logout() {
+function logout () {
   localStorage.removeItem('loggedInUser')
   window.location.href = 'auth.html'
 }

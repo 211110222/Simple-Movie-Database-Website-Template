@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-function toggleMode() {
+function toggleMode () {
   document.body.classList.toggle('light-mode')
 
   if (document.body.classList.contains('light-mode')) {
@@ -9,7 +9,7 @@ function toggleMode() {
   }
 }
 
-function loadTheme() {
+function loadTheme () {
   const theme = localStorage.getItem('theme')
 
   // Terapkan mode yang disimpan

@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
   resetFiltersButton.style.display = 'none'
 })
 
-function showDefaultSections(show) {
+function showDefaultSections (show) {
   const sections = document.querySelectorAll('.popular-movies')
   sections.forEach((section) => {
     section.style.display = show ? 'block' : 'none'
@@ -32,7 +32,7 @@ languageFilter.addEventListener('change', handleFilterChange)
 ratingInput.addEventListener('input', handleFilterChange)
 resetFiltersButton.addEventListener('click', resetFilters)
 
-function handleFilterChange() {
+function handleFilterChange () {
   const isFilterActive =
     genreFilter.value !== '' ||
     releaseYearInput.value !== '' ||
@@ -50,7 +50,7 @@ function handleFilterChange() {
   }
 }
 
-function resetFilters() {
+function resetFilters () {
   genreFilter.value = ''
   releaseYearInput.value = ''
   languageFilter.value = ''
@@ -66,11 +66,11 @@ function resetFilters() {
 
   window.scrollTo({
     top: 0,
-    behavior: 'smooth',
+    behavior: 'smooth'
   })
 }
 
-function fetchGenres() {
+function fetchGenres () {
   fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`)
     .then((response) => response.json())
     .then((data) => {
@@ -79,7 +79,7 @@ function fetchGenres() {
     .catch((error) => console.error('Error fetching genres:', error))
 }
 
-function populateGenreDropdown(genres) {
+function populateGenreDropdown (genres) {
   genreFilter.innerHTML = '<option value="">Select Genre</option>'
   genres.forEach((genre) => {
     const option = document.createElement('option')
@@ -89,9 +89,9 @@ function populateGenreDropdown(genres) {
   })
 }
 
-function fetchLanguages() {
+function fetchLanguages () {
   fetch(
-    `https://api.themoviedb.org/3/configuration/languages?api_key=${apiKey}`,
+    `https://api.themoviedb.org/3/configuration/languages?api_key=${apiKey}`
   )
     .then((response) => response.json())
     .then((data) => {
@@ -100,7 +100,7 @@ function fetchLanguages() {
     .catch((error) => console.error('Error fetching languages:', error))
 }
 
-function populateLanguageDropdown(languages) {
+function populateLanguageDropdown (languages) {
   languageFilter.innerHTML = '<option value="">Select Language</option>'
   languages.forEach((language) => {
     const option = document.createElement('option')
@@ -110,7 +110,7 @@ function populateLanguageDropdown(languages) {
   })
 }
 
-function applyFilters() {
+function applyFilters () {
   const genreId = genreFilter.value
   const releaseYear = releaseYearInput.value
   const language = languageFilter.value

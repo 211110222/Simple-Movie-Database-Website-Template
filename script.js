@@ -28,13 +28,13 @@ searchInput.addEventListener('input', function () {
   }
 })
 
-async function fetchCertification(movieId) {
+async function fetchCertification (movieId) {
   const url = `https://api.themoviedb.org/3/movie/${movieId}/release_dates?api_key=${apiKey}`
   try {
     const response = await fetch(url)
     const data = await response.json()
     const usCertifications = data.results.find(
-      (cert) => cert.iso_3166_1 === 'US',
+      (cert) => cert.iso_3166_1 === 'US'
     )
     if (usCertifications) {
       const certification = usCertifications.release_dates[0]?.certification
@@ -46,12 +46,12 @@ async function fetchCertification(movieId) {
   return null
 }
 
-async function fetchMovies(query) {
+async function fetchMovies (query) {
   spinner.style.display = 'block'
   searchResults.innerHTML = ''
 
   const response = await fetch(
-    `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}&include_adult=false`,
+    `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}&include_adult=false`
   )
   const data = await response.json()
 
@@ -66,7 +66,7 @@ async function fetchMovies(query) {
       filteredResults.push(movie)
     } else {
       console.log(
-        `Filtered out: ${movie.title} due to certification ${certification}`,
+        `Filtered out: ${movie.title} due to certification ${certification}`
       )
     }
   }
@@ -74,7 +74,7 @@ async function fetchMovies(query) {
   spinner.style.display = 'none'
 }
 
-function displayResults(results) {
+function displayResults (results) {
   searchResults.innerHTML = ''
   results.forEach((result) => {
     if (result.poster_path) {
@@ -89,13 +89,13 @@ function displayResults(results) {
   })
 }
 
-function showDetails(id, type) {
+function showDetails (id, type) {
   window.location.href = `detail.html?id=${id}&type=${type}`
 }
 
-async function fetchPopularMovies() {
+async function fetchPopularMovies () {
   const response = await fetch(
-    `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&include_adult=false`,
+    `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&include_adult=false`
   )
   const data = await response.json()
 
@@ -113,7 +113,7 @@ async function fetchPopularMovies() {
   displayPopularMovies(filteredMovies)
 }
 
-function displayPopularMovies(movies) {
+function displayPopularMovies (movies) {
   popularMovieList.innerHTML = ''
   movies.forEach((movie) => {
     if (movie.poster_path) {
@@ -128,9 +128,9 @@ function displayPopularMovies(movies) {
   })
 }
 
-async function fetchTopRatedMovies() {
+async function fetchTopRatedMovies () {
   const response = await fetch(
-    `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&include_adult=false`,
+    `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&include_adult=false`
   )
   const data = await response.json()
 
@@ -148,7 +148,7 @@ async function fetchTopRatedMovies() {
   displayTopRatedMovies(filteredMovies)
 }
 
-function displayTopRatedMovies(movies) {
+function displayTopRatedMovies (movies) {
   topRatedMovieList.innerHTML = ''
   movies.forEach((movie) => {
     if (movie.poster_path) {
@@ -163,9 +163,9 @@ function displayTopRatedMovies(movies) {
   })
 }
 
-async function fetchUpcomingMovies() {
+async function fetchUpcomingMovies () {
   const response = await fetch(
-    `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&include_adult=false`,
+    `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&include_adult=false`
   )
   const data = await response.json()
 
@@ -183,7 +183,7 @@ async function fetchUpcomingMovies() {
   displayUpcomingMovies(filteredMovies)
 }
 
-function displayUpcomingMovies(movies) {
+function displayUpcomingMovies (movies) {
   upcomingMoviesList.innerHTML = ''
   movies.forEach((movie) => {
     if (movie.poster_path) {
@@ -199,7 +199,7 @@ function displayUpcomingMovies(movies) {
 }
 
 // eslint-disable-next-line no-unused-vars
-function logout() {
+function logout () {
   localStorage.removeItem('loggedInUser')
   window.location.href = './Stanly/auth.html'
 }

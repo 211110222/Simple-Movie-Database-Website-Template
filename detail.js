@@ -3,7 +3,7 @@ const urlParams = new URLSearchParams(window.location.search)
 const movieId = urlParams.get('id')
 const mediaType = urlParams.get('type') || 'movie'
 
-function fetchMovieDetails(movieId, mediaType) {
+function fetchMovieDetails (movieId, mediaType) {
   const url = `https://api.themoviedb.org/3/${mediaType}/${movieId}?api_key=${apiKey}&append_to_response=videos`
   fetch(url)
     .then((response) => response.json())
@@ -16,7 +16,7 @@ function fetchMovieDetails(movieId, mediaType) {
     })
 }
 
-function displayMovieDetails(movie) {
+function displayMovieDetails (movie) {
   document.getElementById('movie-title').textContent = movie.title || movie.name
   document.getElementById('release-date').textContent =
     `Release Date: ${movie.release_date || movie.first_air_date}`
@@ -25,7 +25,7 @@ function displayMovieDetails(movie) {
   document.getElementById('summary').textContent = movie.overview
 
   const trailer = movie.videos.results.find(
-    (video) => video.type === 'Trailer' && video.site === 'YouTube',
+    (video) => video.type === 'Trailer' && video.site === 'YouTube'
   )
   if (trailer) {
     document.getElementById('movie-trailer').src =
@@ -36,7 +36,7 @@ function displayMovieDetails(movie) {
   }
 }
 
-function fetchRelatedMovies(movieId, mediaType) {
+function fetchRelatedMovies (movieId, mediaType) {
   const url = `https://api.themoviedb.org/3/${mediaType}/${movieId}/similar?api_key=${apiKey}&include_adult=false&certification_country=US&certification.lte=PG-13`
   fetch(url)
     .then((response) => response.json())
@@ -48,7 +48,7 @@ function fetchRelatedMovies(movieId, mediaType) {
     })
 }
 
-function displayRelatedMovies(movies) {
+function displayRelatedMovies (movies) {
   const slider = document.getElementById('related-movies-slider')
   slider.innerHTML = ''
   movies.forEach((movie) => {
@@ -65,23 +65,23 @@ function displayRelatedMovies(movies) {
   })
 }
 
-function showDetails(id, type) {
+function showDetails (id, type) {
   window.location.href = `detail.html?id=${id}&type=${type}`
 }
 
 // eslint-disable-next-line no-unused-vars
-function toggleFavorite() {
+function toggleFavorite () {
   const loggedInUser = localStorage.getItem('loggedInUser')
   if (!loggedInUser) {
     alert('Please log in to like movies.')
     return
   }
 
-  let favorites =
+  const favorites =
     JSON.parse(localStorage.getItem(`${loggedInUser}_favorites`)) || []
   const favoriteEntry = { id: String(movieId), type: mediaType }
   const existingIndex = favorites.findIndex(
-    (entry) => entry.id === String(movieId),
+    (entry) => entry.id === String(movieId)
   )
 
   if (existingIndex !== -1) {
@@ -95,7 +95,7 @@ function toggleFavorite() {
   updateLikeButton()
 }
 
-function updateLikeButton() {
+function updateLikeButton () {
   const loggedInUser = localStorage.getItem('loggedInUser')
   if (!loggedInUser) return
 
@@ -113,13 +113,13 @@ function updateLikeButton() {
 }
 
 // eslint-disable-next-line no-unused-vars
-async function fetchCertification(movieId) {
+async function fetchCertification (movieId) {
   const url = `https://api.themoviedb.org/3/movie/${movieId}/release_dates?api_key=${apiKey}`
   try {
     const response = await fetch(url)
     const data = await response.json()
     const usCertifications = data.results.find(
-      (cert) => cert.iso_3166_1 === 'US',
+      (cert) => cert.iso_3166_1 === 'US'
     )
     if (usCertifications) {
       const certification = usCertifications.release_dates[0]?.certification
@@ -140,14 +140,14 @@ document.addEventListener('DOMContentLoaded', function () {
 document.getElementById('scroll-left').addEventListener('click', function () {
   document.getElementById('related-movies-slider').scrollBy({
     left: -300,
-    behavior: 'smooth',
+    behavior: 'smooth'
   })
 })
 
 document.getElementById('scroll-right').addEventListener('click', function () {
   document.getElementById('related-movies-slider').scrollBy({
     left: 300,
-    behavior: 'smooth',
+    behavior: 'smooth'
   })
 })
 
@@ -157,7 +157,7 @@ slider.addEventListener('wheel', (e) => {
     e.preventDefault()
     slider.scrollBy({
       left: e.deltaY < 0 ? -100 : 100,
-      behavior: 'smooth',
+      behavior: 'smooth'
     })
   }
 })
