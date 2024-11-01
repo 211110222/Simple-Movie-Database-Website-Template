@@ -1,15 +1,16 @@
 - 👋 Hi, I’m @BeingLazyCoder
--  Demo of Template-https://doostream.netlify.app/
+- Demo of Template-https://doostream.netlify.app/
 - Errors⚠️⚠️⚠️⚠️⚠️⚠️⚠️
 
 - Created a Unified API Template for Movies and TV Shows
-In the world of digital streaming, having access to both movies and TV show details through a single API can be a game-changer for developers. Recognizing the limitations of a Movies-only API, a developer has taken the initiative to create a new template that caters to both Movies and TV Shows. This innovative approach not only streamlines the process of fetching details from a vast database but also enhances the user experience by providing a comprehensive view of the entertainment world.
+  In the world of digital streaming, having access to both movies and TV show details through a single API can be a game-changer for developers. Recognizing the limitations of a Movies-only API, a developer has taken the initiative to create a new template that caters to both Movies and TV Shows. This innovative approach not only streamlines the process of fetching details from a vast database but also enhances the user experience by providing a comprehensive view of the entertainment world.
 - Solution➡️➡️➡️➡️➡️➡️
 
 The new template is designed to be flexible and robust, accommodating the intricate details associated with TV shows such as episodes, seasons, and cast information, alongside the existing movie data. This integration reflects a deep understanding of the entertainment industry's structure and the varied data requirements of its consumers.
+
 - New Template : https://github.com/BeingLazyCoder/Movie-and-TV-Shows-Database-API-Template-with-Streaming-Source-Video.git
 
- - Web Development Focus: Concentrate on mastering HTML and CSS, as they are the foundational languages of web development.
+- Web Development Focus: Concentrate on mastering HTML and CSS, as they are the foundational languages of web development.
 - Project Enhancement: Consider integrating responsive design principles to ensure your movie template provides an optimal viewing experience on various devices.
 - API Utilization: Continue leveraging APIs like TMDB for movie data and Vidsrc for video sources to enrich the functionality of your template.
 - Learning Resources: Explore online tutorials, documentation, and communities for HTML, CSS, and API integration to enhance your skills.

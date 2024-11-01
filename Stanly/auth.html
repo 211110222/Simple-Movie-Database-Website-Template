@@ -1,29 +1,49 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DooStream - Authentication</title>
-    <link rel="stylesheet" href="../style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
     <div class="auth-container">
-        <div id="register-form" class="auth-form">
-            <h2>Register</h2>
-            <input type="text" id="reg-username" placeholder="Username" required>
-            <input type="password" id="reg-password" placeholder="Password" required>
-            <button onclick="register()">Sign Up</button>
-            <p>Already have an account? <a href="#" onclick="toggleForms()">Login</a></p>
-        </div>
-        <div id="login-form" class="auth-form" style="display: none;">
-            <h2>Login</h2>
-            <input type="text" id="login-username" placeholder="Username" required>
-            <input type="password" id="login-password" placeholder="Password" required>
-            <button onclick="login()">Log In</button>
-            <p>Don't have an account? <a href="#" onclick="toggleForms()">Register</a></p>
-        </div>
+      <div id="register-form" class="auth-form">
+        <h2>Register</h2>
+        <input type="text" id="reg-username" placeholder="Username" required />
+        <input
+          type="password"
+          id="reg-password"
+          placeholder="Password"
+          required
+        />
+        <button onclick="register()">Sign Up</button>
+        <p>
+          Already have an account? <a href="#" onclick="toggleForms()">Login</a>
+        </p>
+      </div>
+      <div id="login-form" class="auth-form" style="display: none">
+        <h2>Login</h2>
+        <input
+          type="text"
+          id="login-username"
+          placeholder="Username"
+          required
+        />
+        <input
+          type="password"
+          id="login-password"
+          placeholder="Password"
+          required
+        />
+        <button onclick="login()">Log In</button>
+        <p>
+          Don't have an account?
+          <a href="#" onclick="toggleForms()">Register</a>
+        </p>
+      </div>
     </div>
 
     <script src="auth.js"></script>
-</body>
+  </body>
 </html>
