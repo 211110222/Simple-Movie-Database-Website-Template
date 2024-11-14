@@ -22,5 +22,4 @@ COPY Calvin /usr/share/nginx/html/Calvin
 # Expose port 80
 EXPOSE 80
 
-# Start nginx in the foreground
 CMD ["nginx", "-g", "daemon off;"]
