@@ -1,4 +1,4 @@
-const apiKey = '6d6a7726926c4e1e2cbfbefdf3112379';
+const apiKey = '73da3c2a52ca1beaa0d9360994a2d8a2';
 const searchInput = document.getElementById('search-bar');
 const genreFilter = document.getElementById('genre-filter');
 const releaseYearInput = document.getElementById('release-year');
