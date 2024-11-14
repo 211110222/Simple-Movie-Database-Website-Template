@@ -1,263 +1,216 @@
-const apiKey = '73da3c2a52ca1beaa0d9360994a2d8a2';
-const searchInput = document.getElementById('search-bar');
-const genreFilter = document.getElementById('genre-filter');
-const releaseYearInput = document.getElementById('release-year');
-const languageFilter = document.getElementById('language-filter');
-const ratingInput = document.getElementById('rating');
-const searchResults = document.getElementById('search-results');
-const spinner = document.getElementById('spinner');
-const popularMovieList = document.getElementById('popular-movie-list');
-const TopRatedMovieList = document.getElementById('top-movies');
-const UpcomingMoviesList = document.getElementById('upcoming-movies');
-const resetFiltersButton = document.getElementById('reset-filters');
+const apiKey = '6d6a7726926c4e1e2cbfbefdf3112379'
+const searchInput = document.getElementById('search-bar')
+const searchResults = document.getElementById('search-results')
+const spinner = document.getElementById('spinner')
+const popularMovieList = document.getElementById('popular-movie-list')
+const topRatedMovieList = document.getElementById('top-movies')
+const upcomingMoviesList = document.getElementById('upcoming-movies')
 
-// Load popular, top rated, and upcoming movies on page load
 document.addEventListener('DOMContentLoaded', function () {
-    fetchGenres();
-    fetchLanguages();
-    fetchPopularMovies();
-    fetchTopRatedMovies();
-    fetchUpcomingMovies();
-    showDefaultSections(true); // Menampilkan semua section saat halaman dimuat
-    resetFiltersButton.style.display = 'none'; // Sembunyikan tombol reset saat awal
-});
+  if (!localStorage.getItem('loggedInUser')) {
+    window.location.href = './Stanly/auth.html'
+  }
+})
 
-// Fungsi untuk mengatur visibility section default
-function showDefaultSections(show) {
-    const sections = document.querySelectorAll('.popular-movies');
-    sections.forEach(section => {
-        section.style.display = show ? 'block' : 'none';
-    });
-    
-    // Reset tampilan hasil pencarian jika showing default sections
-    if (show) {
-        searchResults.innerHTML = '';
+document.addEventListener('DOMContentLoaded', function () {
+  fetchPopularMovies()
+  fetchTopRatedMovies()
+  fetchUpcomingMovies()
+})
+
+searchInput.addEventListener('input', function () {
+  const query = searchInput.value.trim()
+  if (query.length > 2) {
+    fetchMovies(query)
+  } else {
+    searchResults.innerHTML = ''
+    spinner.style.display = 'none'
+  }
+})
+
+async function fetchCertification (movieId) {
+  const url = `https://api.themoviedb.org/3/movie/${movieId}/release_dates?api_key=${apiKey}`
+  try {
+    const response = await fetch(url)
+    const data = await response.json()
+    const usCertifications = data.results.find(
+      (cert) => cert.iso_3166_1 === 'US'
+    )
+    if (usCertifications) {
+      const certification = usCertifications.release_dates[0]?.certification
+      return certification
     }
+  } catch (error) {
+    console.error(`Error fetching certification for movie ${movieId}:`, error)
+  }
+  return null
 }
 
-// Add event listeners for filters
-genreFilter.addEventListener('change', handleFilterChange);
-releaseYearInput.addEventListener('input', handleFilterChange);
-languageFilter.addEventListener('change', handleFilterChange);
-ratingInput.addEventListener('input', handleFilterChange);
-resetFiltersButton.addEventListener('click', resetFilters); // Event listener untuk tombol reset
+async function fetchMovies (query) {
+  spinner.style.display = 'block'
+  searchResults.innerHTML = ''
 
-// Handler untuk perubahan filter
-function handleFilterChange() {
-    // Cek apakah ada filter yang aktif
-    const isFilterActive = 
-        genreFilter.value !== '' || 
-        releaseYearInput.value !== '' || 
-        languageFilter.value !== '' || 
-        ratingInput.value !== '';
+  const response = await fetch(
+    `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}&include_adult=false`
+  )
+  const data = await response.json()
 
-    if (isFilterActive) {
-        showDefaultSections(false); // Sembunyikan section default
-        applyFilters(); // Jalankan filter
-        resetFiltersButton.style.display = 'block'; // Tampilkan tombol reset
+  const filteredResults = []
+  for (const movie of data.results) {
+    const certification = await fetchCertification(movie.id)
+
+    if (
+      !certification ||
+      !['R', 'NC-17', '18', '19', 'TV-MA'].includes(certification)
+    ) {
+      filteredResults.push(movie)
     } else {
-        showDefaultSections(true); // Tampilkan section default
-        searchResults.innerHTML = ''; // Bersihkan hasil pencarian
-        resetFiltersButton.style.display = 'none'; // Sembunyikan tombol reset
+      console.log(
+        `Filtered out: ${movie.title} due to certification ${certification}`
+      )
     }
+  }
+  displayResults(filteredResults)
+  spinner.style.display = 'none'
 }
 
-// Fungsi untuk mereset filter
-function resetFilters() {
-    // Reset nilai semua filter
-    genreFilter.value = '';
-    releaseYearInput.value = '';
-    languageFilter.value = '';
-    ratingInput.value = '';
-
-    // Tampilkan kembali section default
-    showDefaultSections(true);
-
-    // Bersihkan hasil pencarian
-    searchResults.innerHTML = '';
-
-    // Refresh tampilan
-    fetchPopularMovies();
-    fetchTopRatedMovies();
-    fetchUpcomingMovies();
-
-    // Scroll ke atas halaman
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
+function displayResults (results) {
+  searchResults.innerHTML = ''
+  results.forEach((result) => {
+    if (result.poster_path) {
+      const movieItem = document.createElement('div')
+      movieItem.classList.add('movie-item')
+      movieItem.innerHTML = `
+                <img src="https://image.tmdb.org/t/p/w500${result.poster_path}" alt="${result.title || result.name}">
+            `
+      movieItem.onclick = () => showDetails(result.id, 'movie')
+      searchResults.appendChild(movieItem)
+    }
+  })
 }
 
-// Fetch genre list from TMDB
-function fetchGenres() {
-    fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`)
-        .then(response => response.json())
-        .then(data => {
-            populateGenreDropdown(data.genres);
-        })
-        .catch(error => console.error('Error fetching genres:', error));
+function showDetails (id, type) {
+  window.location.href = `detail.html?id=${id}&type=${type}`
 }
 
-// Populate genre dropdown
-function populateGenreDropdown(genres) {
-    genreFilter.innerHTML = '<option value="">Select Genre</option>'; // Reset dan tambah default option
-    genres.forEach(genre => {
-        const option = document.createElement('option');
-        option.value = genre.id;
-        option.textContent = genre.name;
-        genreFilter.appendChild(option);
-    });
+async function fetchPopularMovies () {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&include_adult=false`
+  )
+  const data = await response.json()
+
+  const filteredMovies = []
+  for (const movie of data.results) {
+    const certification = await fetchCertification(movie.id)
+
+    if (
+      !certification ||
+      !['R', 'NC-17', '18', '19', 'TV-MA'].includes(certification)
+    ) {
+      filteredMovies.push(movie)
+    }
+  }
+  displayPopularMovies(filteredMovies)
 }
 
-// Fetch language list from TMDB
-function fetchLanguages() {
-    fetch(`https://api.themoviedb.org/3/configuration/languages?api_key=${apiKey}`)
-        .then(response => response.json())
-        .then(data => {
-            populateLanguageDropdown(data);
-        })
-        .catch(error => console.error('Error fetching languages:', error));
+function displayPopularMovies (movies) {
+  popularMovieList.innerHTML = ''
+  movies.forEach((movie) => {
+    if (movie.poster_path) {
+      const movieItem = document.createElement('div')
+      movieItem.classList.add('movie-item')
+      movieItem.innerHTML = `
+                <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+            `
+      movieItem.onclick = () => showDetails(movie.id, 'movie')
+      popularMovieList.appendChild(movieItem)
+    }
+  })
 }
 
-function populateLanguageDropdown(languages) {
-    languageFilter.innerHTML = '<option value="">Select Language</option>';
-    languages.forEach(language => {
-        const option = document.createElement('option');
-        option.value = language.iso_639_1;
-        option.textContent = language.english_name;
-        languageFilter.appendChild(option);
- });
+async function fetchTopRatedMovies () {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&include_adult=false`
+  )
+  const data = await response.json()
+
+  const filteredMovies = []
+  for (const movie of data.results) {
+    const certification = await fetchCertification(movie.id)
+
+    if (
+      !certification ||
+      !['R', 'NC-17', '18', '19', 'TV-MA'].includes(certification)
+    ) {
+      filteredMovies.push(movie)
+    }
+  }
+  displayTopRatedMovies(filteredMovies)
 }
 
-// Filter section
-function applyFilters() {
-    const genreId = genreFilter.value;
-    const releaseYear = releaseYearInput.value;
-    const language = languageFilter.value;
-    const minRating = ratingInput.value;
-
-    let url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc`;
-
-    if (genreId) url += `&with_genres=${genreId}`;
-    if (releaseYear) url += `&primary_release_year=${releaseYear}`;
-    if (language) url += `&with_original_language=${language}`;
-    if (minRating) url += `&vote_average.gte=${minRating}`;
-
-    spinner.style.display = 'block';
-    searchResults.innerHTML = '';
-    
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.results && data.results.length > 0) {
-                displayResults(data.results);
-            } else {
-                searchResults.innerHTML = '<p class="no-results">No movies found matching your criteria.</p>';
-            }
-            spinner.style.display = 'none';
-        })
-        .catch(error => {
-            console.error('Error fetching filtered movies:', error);
-            searchResults.innerHTML = '<p class="error-message">Error loading movies. Please try again.</p>';
-            spinner.style.display = 'none';
-        });
+function displayTopRatedMovies (movies) {
+  topRatedMovieList.innerHTML = ''
+  movies.forEach((movie) => {
+    if (movie.poster_path) {
+      const movieItem = document.createElement('div')
+      movieItem.classList.add('movie-item')
+      movieItem.innerHTML = `
+                <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+            `
+      movieItem.onclick = () => showDetails(movie.id, 'movie')
+      topRatedMovieList.appendChild(movieItem)
+    }
+  })
 }
 
-// Display search results
-function displayResults(results) {
-    searchResults.innerHTML = '';
-    results.forEach(result => {
-        const movieItem = document.createElement('div');
-        movieItem.classList.add('movie-item');
-        if (result.poster_path) {
-            movieItem.innerHTML = `<img src="https://image.tmdb.org/t/p/w500${result.poster_path}" alt="${result.title || result.name}">`;
-        } else {
-            movieItem.innerHTML = `<div class="no-poster">No Poster Available</div>`;
-        }
-        movieItem.onclick = () => showDetails(result.id, 'movie');
-        searchResults.appendChild(movieItem);
-    });
+async function fetchUpcomingMovies () {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&include_adult=false`
+  )
+  const data = await response.json()
+
+  const filteredMovies = []
+  for (const movie of data.results) {
+    const certification = await fetchCertification(movie.id)
+
+    if (
+      !certification ||
+      !['R', 'NC-17', '18', '19', 'TV-MA'].includes(certification)
+    ) {
+      filteredMovies.push(movie)
+    }
+  }
+  displayUpcomingMovies(filteredMovies)
 }
 
-// Fetch popular movies from TMDB
-function fetchPopularMovies() {
-    fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`)
-        .then(response => response.json())
-        .then(data => {
-            displayPopularMovies(data.results);
-        })
-        .catch(error => {
-            console.error('Error fetching popular movies:', error);
-        });
-}
-// Display popular movies in the grid
-function displayPopularMovies(movies) {
-    popularMovieList.innerHTML = '';
-    movies.forEach(movie => {
-        const movieItem = document.createElement('div');
-        movieItem.classList.add('movie-item');
-        movieItem.innerHTML = `
-            <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
-        `;
-        movieItem.onclick = () => showDetails(movie.id, 'movie');
-        popularMovieList.appendChild(movieItem);
-    });
-}
-// Fetch Top Rated movies from TMDB
-function fetchTopRatedMovies() {
-    fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}`)
-        .then(response => response.json())
-        .then(data => {
-            displayTopRatedMovies(data.results);
-        })
-        .catch(error => {
-            console.error('Error fetching Top Rated movies:', error);
-        });
-}
-// Display popular movies in the grid
-function displayTopRatedMovies(movies) {
-    TopRatedMovieList.innerHTML = '';
-    movies.forEach(movie => {
-        const movieItem = document.createElement('div');
-        movieItem.classList.add('movie-item');
-        movieItem.innerHTML = `
-            <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
-        `;
-        movieItem.onclick = () => showDetails(movie.id, 'movie');
-        TopRatedMovieList.appendChild(movieItem);
-    });
-}
-// Fetch Upcoming movies from TMDB
-function fetchUpcomingMovies() {
-    fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}`)
-        .then(response => response.json())
-        .then(data => {
-            displayUpcomingMovies(data.results);
-        })
-        .catch(error => {
-            console.error('Error fetching Upcoming movies:', error);
-        });
-}
-// Display popular movies in the grid
-function displayUpcomingMovies(movies) {
-    UpcomingMoviesList.innerHTML = '';
-    movies.forEach(movie => {
-        const movieItem = document.createElement('div');
-        movieItem.classList.add('movie-item');
-        movieItem.innerHTML = `
-            <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
-        `;
-        movieItem.onclick = () => showDetails(movie.id, 'movie');
-       UpcomingMoviesList.appendChild(movieItem);
-    });
+function displayUpcomingMovies (movies) {
+  upcomingMoviesList.innerHTML = ''
+  movies.forEach((movie) => {
+    if (movie.poster_path) {
+      const movieItem = document.createElement('div')
+      movieItem.classList.add('movie-item')
+      movieItem.innerHTML = `
+                <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+            `
+      movieItem.onclick = () => showDetails(movie.id, 'movie')
+      upcomingMoviesList.appendChild(movieItem)
+    }
+  })
 }
 
-// Show details for selected movie
-function showDetails(id, type) {
-    window.location.href = `detail.html?id=${id}&type=${type}`;
+// eslint-disable-next-line no-unused-vars
+function logout () {
+  localStorage.removeItem('loggedInUser')
+  window.location.href = './Stanly/auth.html'
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const modeToggle = document.getElementById('mode-toggle')
+  if (modeToggle) {
+    // eslint-disable-next-line no-undef
+    modeToggle.addEventListener('click', toggleMode)
+  }
+})
+
+// eslint-disable-next-line no-undef
+document.getElementById('mode-toggle').addEventListener('click', toggleMode)

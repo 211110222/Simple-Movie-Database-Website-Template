@@ -1,18 +1,25 @@
-# Step 1: Gunakan image nginx resmi dari Docker Hub
 FROM nginx:alpine
 
-# Step 2: Hapus default config nginx agar bisa kita ganti
+# Remove existing files in the default nginx directory
 RUN rm /usr/share/nginx/html/*
 
-# Step 3: Salin file HTML dan semua asset ke dalam direktori yang akan dilayani oleh nginx
+# Copy all individual HTML, CSS, and JavaScript files to nginx html folder
 COPY index.html /usr/share/nginx/html/
 COPY style.css /usr/share/nginx/html/
-COPY detail.js /usr/share/nginx/html/
-COPY detail.html /usr/share/nginx/html/
 COPY script.js /usr/share/nginx/html/
+COPY detail.html /usr/share/nginx/html/
+COPY detail.js /usr/share/nginx/html/
 
-# Step 4: Expose port 80 untuk menerima traffic HTTP
+# Copy the "Stanly" folder with all its contents
+COPY Stanly /usr/share/nginx/html/Stanly
+
+# Copy the "Aldi" folder with all its contents
+COPY Aldi /usr/share/nginx/html/Aldi
+
+# Copy the "Calvin" folder with all its contents, excluding node_modules to keep the image light
+COPY Calvin /usr/share/nginx/html/Calvin
+
+# Expose port 80
 EXPOSE 80
 
-# Step 5: Jalankan nginx
 CMD ["nginx", "-g", "daemon off;"]

@@ -1,0 +1,23 @@
+name: Super-Linter Check
+
+on:
+  push:
+    branches:
+      - Final
+  pull_request:
+    branches:
+      - Final
+      
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run Super-Linter
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_JS: true
+          VALIDATE_YAML: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
