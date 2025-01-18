@@ -214,3 +214,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // eslint-disable-next-line no-undef
 document.getElementById('mode-toggle').addEventListener('click', toggleMode)
+//
