@@ -202,3 +202,4 @@ slider.addEventListener('wheel', (e) => {
 
 // eslint-disable-next-line no-undef
 document.getElementById('mode-toggle').addEventListener('click', toggleMode)
+//
