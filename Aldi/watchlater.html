@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DooStream - Favorites</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/Calvin/style_theme.css" />
+  </head>
+  <body>
+    <header class="header">
+      <a class="logo" href="/index.html">DooStream</a>
+      <nav class="nav">
+        <a href="/Stanly/favorite.html" class="favorites-link">Favorites</a>
+        <button id="mode-toggle">Change Theme</button>
+        <button onclick="logout()" class="logout-button">Log Out</button>
+      </nav>
+    </header>
+    <div class="watchlater-container">
+      <h1>Your Watchlater Movies</h1>
+      <div id="watchlater-list" class="movie-grid"></div>
+    </div>
+    <script src="/Calvin/themecode.js"></script>
+    <script src="watchlater.js"></script>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+#############################
+# Deployment for main-container
+#############################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: main-container
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: main-container
+  template:
+    metadata:
+      labels:
+        app: main-container
+    spec:
+      containers:
+      - name: main-container
+        image: 211110222/main-image:latest
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        volumeMounts:
+        - name: main-config-volume
+          mountPath: /etc/nginx/conf.d/default.conf
+          subPath: nginx-main.conf
+      volumes:
+      - name: main-config-volume
+        configMap:
+          name: nginx-main-config
+
+---
+
+#############################
+# Deployment for aldi-container
+#############################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aldi-container
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aldi-container
+  template:
+    metadata:
+      labels:
+        app: aldi-container
+    spec:
+      containers:
+      - name: aldi-container
+        image: 211110222/aldi-image:latest
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        volumeMounts:
+        - name: aldi-config-volume
+          mountPath: /etc/nginx/conf.d/default.conf
+          subPath: nginx-aldi.conf
+      volumes:
+      - name: aldi-config-volume
+        configMap:
+          name: nginx-aldi-config

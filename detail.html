@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <title>DooStream - Movie Details</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./Calvin/style_theme.css" />
+  </head>
+  <body>
+    <header class="header">
+      <a class="logo" href="index.html">DooStream</a>
+      <nav class="nav">
+        <a href="./Aldi/watchlater.html" class="watchlater-link">Watchlater</a>
+        <button id="mode-toggle">Change Theme</button>
+        <a href="./Stanly/favorite.html" class="favorites-link">Favorites</a>
+        <button onclick="logout()" class="logout-button">Log Out</button>
+      </nav>
+    </header>
+    <div class="detail-page">
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe id="movie-trailer" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="movie-details">
+        <h1 id="movie-title">Movie Title</h1>
+        <p id="release-date">Release Date: --</p>
+        <p id="duration">Duration: -- minutes</p>
+        <p id="summary">Movie summary goes here...</p>
+      </div>
+      <button id="like-button" onclick="toggleFavorite()" class="like-button">
+        Like
+      </button>
+      <button id="watchlater-button" onclick="toggleWatchlater()" class="watchlater-button">
+        WatchLater
+      </button>
+      <div class="related-movies">
+        <h2>Related Movies</h2>
+        <button id="scroll-left" class="scroll-button">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="movie-slider" id="related-movies-slider"></div>
+        <button id="scroll-right" class="scroll-button">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>      
+    </div>
+    <script src="./Calvin/themecode.js"></script>
+    <script src="detail.js"></script>
+    <script src="watchlater.js"></script>
+  </body>
+</html>

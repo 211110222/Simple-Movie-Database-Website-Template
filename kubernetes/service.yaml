@@ -1,0 +1,32 @@
+#############################
+# Service for MAIN
+#############################
+apiVersion: v1
+kind: Service
+metadata:
+  name: main-service
+spec:
+  type: NodePort
+  selector:
+    app: main-container       # <-- Match with Deployment label
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30080
+
+---
+#############################
+# Service for ALDI
+#############################
+apiVersion: v1
+kind: Service
+metadata:
+  name: aldi-service
+spec:
+  type: NodePort
+  selector:
+    app: aldi-container       # <-- Match with Deployment label
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30081
