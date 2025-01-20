@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', loadWatchlater);
 // eslint-disable-next-line no-unused-vars
 function logout() {
     localStorage.removeItem('loggedInUser');
-    window.location.href = 'auth.html';
+    window.location.href = '../Stanly/auth.html';
 }
 
 document.getElementById('mode-toggle').addEventListener('click', toggleMode);
